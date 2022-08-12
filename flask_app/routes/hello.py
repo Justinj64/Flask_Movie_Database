@@ -8,6 +8,7 @@ class Hello(Resource):
             response = {
                 "message": "Hello from Flask Movie Database"
             }
+            print(response)
             return response, 200, {"Content-Type": "application/json"}
         except Exception as e:
             response = {
