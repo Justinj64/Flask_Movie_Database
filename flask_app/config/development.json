@@ -1,0 +1,21 @@
+{
+    "APP_NAME": "flask_movie_db",
+    "ENV": "development",
+    "HOST":"localhost",
+    "PORT": 5000,
+    "DEBUG":false,
+
+    "RABBITMQ_BROKER_URL": "",
+    "DB_URL": "",
+    "REDIS_HOST": "127.0.0.1",
+    "REDIS_PORT": 6379,
+    "REDIS_DB": 0,
+    "REDIS_PASSWORD": null,
+    "REDIS_SSL":false,
+
+    "CELERY_CONFIG": {
+        "worker_prefetch_multiplier": 1,
+        "task_ignore_result": "True",
+        "task_acks_late": "False"
+    }
+}
