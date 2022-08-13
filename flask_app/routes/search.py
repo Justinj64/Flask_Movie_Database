@@ -2,7 +2,7 @@ from flask_restful import Resource
 from models.app_models import MovieDetails, MovieGenres
 from flask import request
 from models.app_models import db
-from sqlalchemy import literal_column, func
+from sqlalchemy import func
 from utils.common_functions import tuple_to_dict
 
 
@@ -19,18 +19,19 @@ class Search(Resource):
         self.exception_code = 500
 
     def fetch_result(self, queries, page_number, page_size):
-        movie_details = db.session.query(MovieDetails.name,
+        movie_details = db.session.query(MovieDetails.id,
+                                         MovieDetails.name,
                                          MovieDetails.popularity,
                                          MovieDetails.director,
                                          MovieDetails.imdb_score,
-                                         func.string_agg(MovieGenres.genre, literal_column("','")))\
+                                         func.group_concat(MovieGenres.genre))\
                                     .join(MovieGenres, MovieDetails.id == MovieGenres.movie_id)\
                                     .group_by(MovieDetails.id)\
                                     .filter(*queries)\
                                     .order_by(MovieDetails.popularity.desc())\
                                     .paginate(page_number, page_size, False)\
 
-        headers = ['name','popularity', 'director', 'imdb_score', 'genres']
+        headers = ['id', 'name','popularity', 'director', 'imdb_score', 'genres']
         formatted_result = tuple_to_dict(headers, movie_details)
         return formatted_result
 

@@ -70,3 +70,16 @@ class FlaskRedis:
         except Exception as e:
             print(e)
             raise e
+
+    @staticmethod
+    def fetch_user_details(username):
+        try:
+            redis_connection = c_app.config.get('REDIS_CONNECTION')
+            user_details = redis_connection.hgetall(f"USER_DETAILS:{username}")
+
+            if not user_details:
+                return None
+            return user_details
+        except Exception as e:
+            print(e)
+            return None

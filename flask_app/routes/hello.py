@@ -2,7 +2,10 @@
 from flask_restful import Resource
 
 
-class Hello(Resource):
+class HealthCheck(Resource):
+    '''
+        Sample endpoint created to check if flask app is running
+    '''
     def get(self):
         try:
             response = {
