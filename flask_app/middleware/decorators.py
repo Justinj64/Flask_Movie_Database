@@ -6,6 +6,9 @@ from resource_bindings.redis_bindings import FlaskRedis
 
 
 def login_required(f):
+    '''
+        basic auth check while using the `user` endpoint
+    '''
     @wraps(f)
     def decorated_function(*args, **kwargs):
         auth = request.authorization
@@ -16,6 +19,9 @@ def login_required(f):
 
 
 def token_required(f):
+    '''
+        for crud operations on movie records, token is mandatory
+    '''
     def wrapper(*args, **kwargs):
         if not request.headers.get('Authorization'):
             response = {
@@ -29,6 +35,10 @@ def token_required(f):
 
 
 def is_admin(f):
+    '''
+        assert token in the request and check expiry condition for token
+        validate if the user triggering the incoming request is of type `admin`
+    '''
     def wrapper(*args, **kwargs):
         auth_token = request.headers.get('Authorization')
         token_details = get_token_fields(auth_token)
@@ -42,7 +52,7 @@ def is_admin(f):
             return response, 401
         user_details = FlaskRedis.fetch_user_details(username)
         if token_details.get('expiry_timestamp'):
-            format = '%Y-%m-%d %H:%M:%S'  # The format
+            format = '%Y-%m-%d %H:%M:%S'  # time format
             token_expiry_date = datetime.datetime.strptime(token_details['expiry_timestamp'], format)
             current_timestamp = datetime.datetime.strptime(user_details['expiry_timestamp'], format)
             print(token_expiry_date, current_timestamp)

@@ -1,4 +1,4 @@
-FROM python:3.6-jessie
+FROM python:3.10-slim-bullseye
 COPY ./flask_app/requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 COPY ./flask_app/ /home/flask_app/

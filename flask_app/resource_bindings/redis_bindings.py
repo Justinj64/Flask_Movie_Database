@@ -6,8 +6,10 @@ from datetime import datetime, timedelta
 
 
 class FlaskRedis:
-
-    def __init__(self, app=None, config_prefix="FLASK_REDIS", **kwargs):    
+    '''
+        Redis class instance for the flask applications
+    '''
+    def __init__(self, app=None, config_prefix="FLASK_REDIS", **kwargs):
         self.config_prefix = config_prefix
 
         if app is not None:
@@ -20,10 +22,12 @@ class FlaskRedis:
             redis_db = app.config.get('REDIS_DB')
             redis_password = app.config.get('REDIS_PASSWORD') if app.config.get('REDIS_PASSWORD') else None
             redis_ssl = app.config.get('REDIS_SSL')
-
-            redis_connection = redis.StrictRedis(host=redis_host, port=redis_port,
-                                        db=redis_db, password=redis_password,
-                                        ssl=redis_ssl, decode_responses=True)
+            redis_connection = redis.StrictRedis(host=redis_host,
+                                                 port=redis_port,
+                                                 db=redis_db,
+                                                 password=redis_password,
+                                                 ssl=redis_ssl,
+                                                 decode_responses=True)
             app.config['REDIS_CONNECTION'] = redis_connection
             print("Redis app created")
         except Exception as e:
@@ -32,6 +36,9 @@ class FlaskRedis:
     @staticmethod
     def insert_user_details(username, usertype, verify=True):
         try:
+            '''
+                Insert user details in redis when new user is created
+            '''
             redis_connection = c_app.config.get('REDIS_CONNECTION')
             key = f"USER_DETAILS:{username}"
             if verify:
@@ -74,6 +81,9 @@ class FlaskRedis:
     @staticmethod
     def fetch_user_details(username):
         try:
+            '''
+                fetch user details from redis based on a specific username
+            '''
             redis_connection = c_app.config.get('REDIS_CONNECTION')
             user_details = redis_connection.hgetall(f"USER_DETAILS:{username}")
 

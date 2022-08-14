@@ -3,6 +3,11 @@ import json
 
 
 def get_config(config_names):
+    '''
+        will check for config .json file in the /config folder
+        for eg. if the config file is named development.json, set the `env=development`
+        all config parameters will be loaded onto the app context
+    '''
     configs = config_names.split()
     config_data = dict()
     for config_name in configs:

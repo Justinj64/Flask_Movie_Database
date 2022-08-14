@@ -1,5 +1,10 @@
 from functools import wraps
 
+'''
+    Decorator class to handle exceptions
+    on the celery tasks
+'''
+
 
 def handle_exception(func):
     @wraps(func)

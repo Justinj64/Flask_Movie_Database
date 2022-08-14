@@ -1,6 +1,9 @@
-# Import Modules:
-
 from marshmallow import (Schema, fields)
+
+'''
+    Defining every payload being used in the request as a marshmallow schema
+    Validation and restriction of the parameters can be handled here itself
+'''
 
 
 class UserSchema(Schema):
@@ -17,7 +20,7 @@ class InsertMovieSchema(Schema):
     popularity = fields.Float(default=0.0)
     director = fields.Str(required=True)
     imdb_score = fields.Float(default=0)
-    genres = fields.List(fields.Str(),required=True)
+    genres = fields.List(fields.Str(), required=True)
 
 
 class UpdateMovieSchema(Schema):

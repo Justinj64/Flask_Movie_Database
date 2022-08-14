@@ -1,4 +1,4 @@
-FROM python:3.6-jessie
+FROM python:3.10-slim-bullseye
 COPY ./src/requirements.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 COPY ./src/ /home/src/

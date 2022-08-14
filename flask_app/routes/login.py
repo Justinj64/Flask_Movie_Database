@@ -10,7 +10,7 @@ class Login(Resource):
     '''
         Login class to generate token once user has been created
         Short lived token generated with a specific TTL
-        and inserted onto redis for further Movie crud endpoint
+        and inserted onto redis for further Movie crud endpoints
     '''
     def __init__(self):
         self.headers = {
@@ -20,6 +20,11 @@ class Login(Resource):
         self.exception_code = 500
 
     def post(self):
+        '''
+            Token used is of typt `JWT`.
+            Token would be invalidated after the expiry of the given ttl
+            In which case, a new token should be generated
+        '''
         try:
             request_body = request.get_json()
             # Schema validation - username and ttl mandatory

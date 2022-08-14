@@ -6,7 +6,7 @@ from config import get_config
 
 
 def create_app(config_name):
-
+    # Initialize flask app and updated config accordingly
     app = Flask(__name__)
     CORS(app)
     app.config.update(get_config(config_name))
