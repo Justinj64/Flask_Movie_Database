@@ -89,7 +89,7 @@ A Movie library Database which allows users to fetch details of a movie as well 
 
 # Installation
 
-Python dependencies are in requirements.txt file under each sub folder.
+Python dependencies are in requirements.txt file under /flask_app and /celery_app/src.
 
 For installation of components, follow the below given steps:
 ```
@@ -133,7 +133,7 @@ Initialize both the applications with the following command.
 
 # Logs
 ```
-Api logs    : /Flask_Movie_Database/celery_app/info.log*.
+Api logs    : /Flask_Movie_Database/flask_app/info.log.
 Worker logs : /Flask_Movie_Database/celery_app/src/worker.log
 ```
 
