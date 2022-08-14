@@ -1,22 +1,125 @@
 # Flask Movie Database
 
-something info regarding the app.
+A Movie library Database which allows users to fetch details of a movie as well as create/edit Movie records such as:
+- Movie Name
+- Director
+- Imdb Score
+- Popularity
+- Genres
 
-## Installation
+# Api Reference
+## User Creation
 
-Install dependencies from the requirements.txt file.
+```http
+  POST /v1/user
+```
+### Under Authorization - Basic Auth
+| Parameter       | Type      | Description                |
+| :--------       | :-------  | :------------------------- |
+| `Username`      | `string`  |  username|
+| `Password`      | `string`  |  password|
 
-```bash
-pip3 install -r src/requirements.txt
+### Request Body
+| Parameter       | Type      | Description                |
+| :--------       | :-------  | :------------------------- |
+| `user_type`      | `string`  |  user/admin(for access purpose)               |
+
+
+## Token Generation
+```
+  POST /v1/user
+```
+### Request Body
+| Parameter       | Type      | Description                  |
+| :--------       | :-------  | :-------------------------   |
+| `username`      | `string`  | username created in (/v1/user) |
+| `token_ttl`      | `integer`  | expiry time for token in minutes |
+
+
+## List Movies
+### Request Body
+```http
+  GET /v1/search
 ```
 
-## Usage
+| Parameter         | Type      | Description                |
+| :--------         | :-------  | :------------------------- |
+| `movie_name`      | `string`  | complete movie name |
+| `director_name`   | `string`  | movie director's name |
+| `rating`          | `integer` | rating from 1-10(eg.7+) |
+| `page_size`       | `integer` | number of elements in the json payload 
+| `page_number`     | `integer` | page number to be displayed
+
+
+## Movie Operations
+  Token Mandatory for all operations
+```
+  POST/PUT /v1/movie
+```
+### Request Body
+| Parameter         | Type       | Description                  |
+| :--------         | :-------   | :-------------------------   |
+| `name`            | `string`   | complete movie name |
+| `director`        |  `string`  | movie director's name |
+| `popularity`      | `integer`  | range 1-100 |
+| `imdb_score`      | `integer`  | range 1-10 |
+| `genres`          | `list`     | eg. ["Fantasy","Action"]|
+
+
+```
+  DELETE /v1/movie
+```
+### Request Body
+| Parameter         | Type       | Description                  |
+| :--------         | :-------   | :-------------------------   |
+| `id`              | `integer`    | movie id  |
+
+# Installation
+
+Python dependencies are in requirements.txt file under each sub folder.
+
+For installation of components, follow the below given steps:
+```
+Install Docker:
+	https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04
+
+Install RabbitMq:
+	sudo docker run -itd  --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
+
+Configuration:
+    sudo rabbitmqctl add_user username password
+
+    sudo rabbitmqctl add_vhost sample_host
+
+    sudo rabbitmqctl set_user_tags username administrator
+
+    sudo rabbitmqctl set_permissions -p sample_host username ".*" ".*" ".*"
+
+Clone Project Repo:
+	git clone https://github.com/Justinj64/Flask_Movie_Database.git
+
+Install Make:
+	sudo apt install make
+
+
+```
+
+# Usage
 For local instance, change environment variables in *src/config/development.json* and set **ENV=development** in Dockerfile.
 
-Start the application with the following command.
+Initialize both the applications with the following command.
+
+#### Flask
 ```bash
-make build && make run
+../../Flask_Movie_Database/ -> make build && make run
+```
+#### Celery
+```
+/workspace/project/Flask_Movie_Database/celery_app -> make build && make run
 ```
 
-## Logs
-Application logs are redirected to *src/info.log*.
+# Logs
+```
+Api logs    : /Flask_Movie_Database/celery_app/info.log*.
+Worker logs : /Flask_Movie_Database/celery_app/src/worker.log
+```
