@@ -6,30 +6,42 @@ A Movie library Database which allows users to fetch details of a movie as well 
 - Imdb Score
 - Popularity
 - Genres
-
+## Tested on :
+ - Ubuntu 22.04
+## Hosted on :
+- Aws Ec2 Instance 
+## Components Used:
+- Python 3.7/3.10
+- SQLlite
+- Redis
+- Gunicorn
+- Docker
+- RabbitMq 
+- Celery
 # Api Reference
 ## User Creation
 
-```http
+```
   POST /v1/user
 ```
-### Under Authorization - Basic Auth
+#### Under Authorization - Basic Auth
 | Parameter       | Type      | Description                |
 | :--------       | :-------  | :------------------------- |
 | `Username`      | `string`  |  username|
 | `Password`      | `string`  |  password|
 
-### Request Body
+#### Request Body
 | Parameter       | Type      | Description                |
 | :--------       | :-------  | :------------------------- |
 | `user_type`      | `string`  |  user/admin(for access purpose)               |
 
 
 ## Token Generation
+
 ```
   POST /v1/user
 ```
-### Request Body
+#### Request Body
 | Parameter       | Type      | Description                  |
 | :--------       | :-------  | :-------------------------   |
 | `username`      | `string`  | username created in (/v1/user) |
@@ -37,8 +49,9 @@ A Movie library Database which allows users to fetch details of a movie as well 
 
 
 ## List Movies
-### Request Body
-```http
+#### Request Body
+
+```
   GET /v1/search
 ```
 
@@ -56,7 +69,7 @@ A Movie library Database which allows users to fetch details of a movie as well 
 ```
   POST/PUT /v1/movie
 ```
-### Request Body
+#### Request Body
 | Parameter         | Type       | Description                  |
 | :--------         | :-------   | :-------------------------   |
 | `name`            | `string`   | complete movie name |
@@ -69,7 +82,7 @@ A Movie library Database which allows users to fetch details of a movie as well 
 ```
   DELETE /v1/movie
 ```
-### Request Body
+#### Request Body
 | Parameter         | Type       | Description                  |
 | :--------         | :-------   | :-------------------------   |
 | `id`              | `integer`    | movie id  |
