@@ -136,3 +136,9 @@ Initialize both the applications with the following command.
 Api logs    : /Flask_Movie_Database/celery_app/info.log*.
 Worker logs : /Flask_Movie_Database/celery_app/src/worker.log
 ```
+
+# Tests
+Included under /Flask_Movie_Database/flask_app/Tests
+```
+  pytest -rA 
+```
