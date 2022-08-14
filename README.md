@@ -93,11 +93,15 @@ Python dependencies are in requirements.txt file under /flask_app and /celery_ap
 
 For installation of components, follow the below given steps:
 ```
+Install Redis:
+  https://redis.io/docs/getting-started/installation/install-redis-on-linux/
+
 Install Docker:
-	https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04
+  https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-22-04
+
 
 Install RabbitMq:
-	sudo docker run -itd  --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
+  sudo docker run -itd  --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3.9-management
 
 Configuration:
     sudo rabbitmqctl add_user username password
