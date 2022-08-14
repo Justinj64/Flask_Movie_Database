@@ -49,9 +49,9 @@ class Search(Resource):
             page_number = int(args.get("page_number", 1))
             page_size = int(args.get("page_size", 10))
             if args.get('movie_name'):
-                queries.append(MovieDetails.name == args.get('movie_name'))
+                queries.append(MovieDetails.name.like("%"+args.get('movie_name')+"%"))
             if args.get('director_name'):
-                queries.append(MovieDetails.director == args.get('director_name'))
+                queries.append(MovieDetails.director.like("%"+args.get('director_name')+"%"))
             if args.get('rating'):
                 rating = args.get('rating')[:-1]
                 queries.append(MovieDetails.imdb_score >= float(rating))
