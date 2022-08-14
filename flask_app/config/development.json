@@ -5,7 +5,7 @@
     "PORT": 5000,
     "DEBUG":false,
     "QUEUE_NAME":"DB_OPERATIONS",
-    "RABBITMQ_BROKER_URL": "amqp://justin_admin:thisissecret@127.0.0.1:5672/whatsapp",
+    "RABBITMQ_BROKER_URL": "amqp://justin_admin:thisissecret@127.0.0.1:5672/justin_host",
     "SQLALCHEMY_DATABASE_URI":"sqlite:////home/flask_app/Movies.db",
     "REDIS_HOST": "127.0.0.1",
     "REDIS_PORT": 6379,
