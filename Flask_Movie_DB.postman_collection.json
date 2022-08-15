@@ -13,7 +13,7 @@
 					"basic": [
 						{
 							"key": "username",
-							"value": "admin4",
+							"value": "admin",
 							"type": "string"
 						},
 						{
@@ -58,7 +58,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"username\":\"admin4\",\n    \"token_ttl\":15\n}",
+					"raw": "{\n    \"username\":\"admin\",\n    \"token_ttl\":15\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -97,7 +97,7 @@
 					"query": [
 						{
 							"key": "movie_name",
-							"value": "sampleMovie212",
+							"value": "sampleMovie",
 							"disabled": true
 						},
 						{
@@ -132,13 +132,13 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluNCIsImNyZWF0ZWRfdGltZXN0YW1wIjoiMjAyMi0wOC0xM1QxNzozNjoxMS4xNTI4MTIiLCJleHBpcnlfdGltZXN0YW1wIjoiMjAyMi0wOC0xMyAxNzo1MToxMSJ9.jg6xUNvjhI4vnbU14iRzPv-L5vbJ_AHNuYorxSL2was",
+						"value": "{{token}}",
 						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"\",\n    \"director\":\"\",\n    \"genres\":[\"Fantsay\",\"Action\"]\n}",
+					"raw": "{\n    \"name\": \"someMovie\",\n    \"director\":\"someDirector\",\n    \"genres\":[\"Fantasy\"]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -167,12 +167,12 @@
 					{
 						"key": "Authorization",
 						"type": "text",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsImNyZWF0ZWRfdGltZXN0YW1wIjoiMjAyMi0wOC0xM1QwMjo0OToxNi4wNTYxODUiLCJleHBpcnlfdGltZXN0YW1wIjoiMjAyMi0wOC0xMyAwMzowNDoxNiJ9.ZMTpmM93bBDj13uKtWKWjQRTDIDiWkkOtTRlFDsoWqE"
+						"value": "{{token}}"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 250,\n    \"name\":\"sampleMovie24\",\n    \"popularity\":\"66\",\n    \"genres\":[\"Fantasy\"]\n}",
+					"raw": "{\n    \"id\": 252,\n    \"name\":\"sampleMovie\",\n    \"popularity\":\"66\",\n    \"genres\":[\"Fantasy\"]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -201,12 +201,12 @@
 					{
 						"key": "Authorization",
 						"type": "text",
-						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluMSIsImNyZWF0ZWRfdGltZXN0YW1wIjoiMjAyMi0wOC0xM1QwMjo0OToxNi4wNTYxODUiLCJleHBpcnlfdGltZXN0YW1wIjoiMjAyMi0wOC0xMyAwMzowNDoxNiJ9.ZMTpmM93bBDj13uKtWKWjQRTDIDiWkkOtTRlFDsoWqE"
+						"value": "{{token}}"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"id\": 250\n}",
+					"raw": "{\n    \"id\": 252\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -214,12 +214,11 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5000/v1/movie",
+					"raw": "http://{{url}}/v1/movie",
 					"protocol": "http",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "5000",
 					"path": [
 						"v1",
 						"movie"
