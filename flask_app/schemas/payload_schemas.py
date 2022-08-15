@@ -1,4 +1,4 @@
-from marshmallow import (Schema, fields)
+from marshmallow import (Schema, fields, validate)
 
 '''
     Defining every payload being used in the request as a marshmallow schema
@@ -7,7 +7,8 @@ from marshmallow import (Schema, fields)
 
 
 class UserSchema(Schema):
-    user_type = fields.Str(required=True)
+    user_type = fields.Str(required=True,
+                           validate=validate.OneOf(["admin", "user"]))
 
 
 class TokenSchema(Schema):
@@ -16,20 +17,24 @@ class TokenSchema(Schema):
 
 
 class InsertMovieSchema(Schema):
-    name = fields.Str(required=True)
+    name = fields.Str(required=True,
+                      validate=validate.Length(min=1))
     popularity = fields.Float(default=0.0)
-    director = fields.Str(required=True)
+    director = fields.Str(required=True,
+                          validate=validate.Length(min=1))
     imdb_score = fields.Float(default=0)
-    genres = fields.List(fields.Str(), required=True)
+    genres = fields.List(fields.Str(),
+                         required=True,
+                         validate=validate.Length(min=1))
 
 
 class UpdateMovieSchema(Schema):
     id = fields.Int(required=True)
-    name = fields.Str()
+    name = fields.Str(validate=validate.Length(min=1))
     popularity = fields.Float()
-    director = fields.Str()
+    director = fields.Str(validate=validate.Length(min=1))
     imdb_score = fields.Float()
-    genres = fields.List(fields.Str())
+    genres = fields.List(fields.Str(validate=validate.Length(min=1)))
 
 
 class DeleteMovieSchema(Schema):

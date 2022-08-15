@@ -52,11 +52,10 @@ def is_admin(f):
             return response, 401
         user_details = FlaskRedis.fetch_user_details(username)
         if token_details.get('expiry_timestamp'):
-            format = '%Y-%m-%d %H:%M:%S'  # time format
-            token_expiry_date = datetime.datetime.strptime(token_details['expiry_timestamp'], format)
-            current_timestamp = datetime.datetime.strptime(user_details['expiry_timestamp'], format)
-            print(token_expiry_date, current_timestamp)
-            if token_expiry_date > current_timestamp:
+            time_format = '%Y-%m-%d %H:%M:%S'  # time format
+            token_expiry_date = datetime.datetime.strptime(token_details['expiry_timestamp'], time_format)
+            current_timestamp = datetime.datetime.utcnow()
+            if current_timestamp > token_expiry_date:
                 response = {
                     'message': 'unable to process request',
                     'status': 'failed',
