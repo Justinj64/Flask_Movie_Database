@@ -51,6 +51,14 @@ def is_admin(f):
             }
             return response, 401
         user_details = FlaskRedis.fetch_user_details(username)
+        if not user_details:
+            response = {
+                    'message': 'unable to process request',
+                    'status': 'failed',
+                    'reason': "username is not present, kindly create"
+                }
+            return response, 401
+
         if token_details.get('expiry_timestamp'):
             time_format = '%Y-%m-%d %H:%M:%S'  # time format
             token_expiry_date = datetime.datetime.strptime(token_details['expiry_timestamp'], time_format)
